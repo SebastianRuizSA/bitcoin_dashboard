@@ -16,9 +16,9 @@ class ValorHistorico(models.Model):
         Bitcoin,
         on_delete=models.CASCADE
     )
-    day_timestamp = models.CharField(max_length=50) # Los dias estan en formato UNIX timestamp.
+    day = models.DateField() # Los dias estan en formato UNIX timestamp.
     price = models.FloatField()
     marketcap = models.FloatField()
 
     class Meta:
-        ordering = ("day_timestamp", )
+        ordering = ("day", )
