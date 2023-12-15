@@ -1,12 +1,7 @@
-from django.urls import path, include
-from rest_framework import routers
-from .views import BitcoinUpdateView
-
-#router = routers.DefaultRouter()
-#router.register(r'update', BitcoinUpdateView)
+from django.urls import path
+from .views import BitcoinViewSet, BitcoinUpdateView
 
 urlpatterns = [
-    #path('', include(router.urls)),
+    path('', BitcoinViewSet.as_view(), name='bitcoin-view'),
     path('update/', BitcoinUpdateView.as_view(), name='bitcoin-update'),
-
 ]
