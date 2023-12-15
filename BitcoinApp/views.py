@@ -47,6 +47,11 @@ class ValorHistoricoUpdateViewSet(APIView):
     serializer_class = ValorHistoricoSerializer
 
     def get(self, request):
-        historic_values = update_valor_historico_list()
+        bitcoin_id = request.GET.get('bitcoin_id')
+        currency = request.GET.get('currency')
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+
+        historic_values = update_valor_historico_list(bitcoin_id, currency, start_date, end_date)
         data = self.serializer_class(historic_values, many=True).data
         return Response(data)

@@ -9,7 +9,6 @@ def get_bitcoins_list_from_API():
     url = f'https://api.coingecko.com/api/v3/coins/list?include_platform=false'
     response = requests.get(url)
     data = response.json()
-    # Hacer algo para que la data se guarde en un archivo en vez de pedirla a cada rato.
     return data
 
 @transaction.atomic
@@ -43,12 +42,17 @@ def convert_unix_timestamp_to_datetime(unix_timestamp, format='%Y-%m-%d'):
 
 
 def get_historic_values_list_from_API(bitcoin_id, currency, start_date, end_date):
-    #url = f"https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=7"
-    url = f'https://api.coingecko.com/api/v3/coins/{bitcoin_id}/market_chart/range?vs_currency={currency}&from={start_date}&to={end_date}'
+    # Transformar las fechas a datetime.
+
+    start_date = datetime.strptime(start_date, "%d-%m-%Y")
+    end_date = datetime.strptime(end_date, "%d-%m-%Y")
+
+    # Calculate the difference between the two dates
+    days = (start_date - end_date).days
+
+    url = f'https://api.coingecko.com/api/v3/coins/{bitcoin_id}/market_chart?vs_currency={currency}&days={days}'
     response = requests.get(url)
     data = response.json()
-    breakpoint()
-    # Hacer algo para que la data se guarde en un archivo en vez de pedirla a cada rato.
     return data
 
 @transaction.atomic
