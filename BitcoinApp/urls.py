@@ -1,11 +1,12 @@
-from django.conf.urls import include, re_path
-from rest_framework.routers import DefaultRouter
-from .views import BitcoinViewSet
+from django.urls import path, include
+from rest_framework import routers
+from .views import BitcoinUpdateView
 
-
-router = DefaultRouter()
-router.register(Bitcoin, BitcoinViewSet, base_name='bitcoin')
+#router = routers.DefaultRouter()
+#router.register(r'update', BitcoinUpdateView)
 
 urlpatterns = [
-    re_path('^', include(router.urls)),
+    #path('', include(router.urls)),
+    path('update/', BitcoinUpdateView.as_view(), name='bitcoin-update'),
+
 ]

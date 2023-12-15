@@ -1,7 +1,7 @@
 from django.db import models
 
 class Bitcoin(models.Model):
-    id_btc = models.CharField(max_length=50)
+    id = models.CharField(max_length=50, primary_key=True)
     symbol = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
 
